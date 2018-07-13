@@ -1,0 +1,73 @@
+.upload{
+    // width: 100%;
+    max-width: 9999px;
+    .upload-list-cover{
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,.6);
+        text-align: center;
+        i{
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 0 2px;                            
+        }
+    } 
+    .image-show{
+        max-width: 100%;
+        max-height: 100%;
+        border: 1px solid transparent;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 1px 1px rgba(0,0,0,.2);                                            
+    }
+    .multiple-image-show{
+        display: inline-block;
+        margin-right: 10px;
+        width: 58px;
+        height: 58px;
+        line-height: 58px;
+        position: relative;
+        img{
+            display: inline-block;
+            width:58px;
+            height:58px;
+        }
+    }
+    .image-show:hover{
+        .upload-list-cover{
+            display: block;
+            i{
+                text-align: center;
+            }
+        }
+    }
+    .multiple-image-show:hover{
+        .upload-list-cover{
+            display: block;
+            i{
+                text-align: center;
+            }
+        }
+    }
+    .multiple-upload{
+        display: inline-block;
+        .ivu-upload{
+            background: rgba(255, 255, 255, 0);
+        }
+        width:58px;
+        height:58px;
+        >div{
+            width: 100%;
+            height:100%;
+            line-height: 58px;
+        }
+        .ivu-icon{
+            line-height: inherit;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+<div class="upload" :style="style">
+    <div v-if="!multiple">
+        <div class="image-show" v-if="image.status === 'finished'" :style="style">
+            <template v-if="image.status === 'finished'">
+                <img :src="getUrl" :style="style"/>
+                <div class="upload-list-cover">
+                    <i-icon type="ios-eye-outline" size="32" @click.native="handleView(image)"></i-icon>
+                    <i-icon type="trash-a" size="32" @click.native="handleUploadTrash"></i-icon>
+                </div>
+            </template>
+            <template v-else>
+                <i-progress v-if="image.showProgress" :percent="image.percentage" hide-info></i-progress>
+            </template>
+        </div>                                    
+        <i-upload v-else :show-upload-list="false" :on-success="handleImgSuccess" :format="['jpg','jpeg','png']" :max-size="maxSize"
+                :on-format-error="handFormatError" :on-exceeded-size="handleMaxSize" 
+                type="drag" :action="imgUploadUrl" :headers="uploadHeaders" :data="getDatas">
+            <div class="upload-btn" :style="style">
+                <i-icon type="camera" size="32"></i-icon>
+            </div>
+        </i-upload>
+    </div>
+    <div v-else>
+        <div v-for="item in uploadList" class="multiple-image-show">
+            <template v-if="item.status === 'finished'">
+                <img :src="item.url">
+                <div class="upload-list-cover">
+                    <i-icon type="ios-eye-outline" @click.native="handleView(item)"></i-icon>
+                    <i-icon type="ios-trash-outline" @click.native="handleRemove(item)"></i-icon>
+                </div>
+            </template>
+            <template v-else>
+                <i-progress v-if="item.showProgress" :percent="item.percentage" hide-info></i-progress>
+            </template>
+        </div>
+        <i-upload
+        ref="multipleUpload"
+        :headers="uploadHeaders"
+        :show-upload-list="false"
+        :default-file-list="defaultList"
+        :on-success="handleMultipleSuccess"
+        :format="['jpg','jpeg','png']"
+        :max-size="maxSize"
+        :on-format-error="handleFormatError"
+        :on-exceeded-size="handleMaxSize"
+        :before-upload="handleBeforeUpload"
+        multiple
+        type="drag"
+        :action="imgUploadUrl"
+        :data="getDatas"
+        class="multiple-upload">
+            <div >
+                <i-icon type="camera" size="32"></i-icon>
+            </div>
+        </i-upload>
+    </div>
+    <i-modal title="预览图片" v-model="visible">
+            <img :src="scanUrl" v-if="visible" style="width: 100%">
+    </i-modal>
+</div>
